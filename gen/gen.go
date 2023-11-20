@@ -370,9 +370,14 @@ func parseLinks(uris []string) []*Link {
 				log.Warn("illegal vmess uri schema: " + uri)
 				continue
 			}
-			links = append(links, &Link{
-				VmessCfg: cfg,
-			})
+			//只用第三或者第四个
+			if strings.Contains(cfg.Ps, "3.") || strings.Contains(cfg.Ps, "4.") {
+				links = append(links, &Link{
+					VmessCfg: cfg,
+				})
+			} else {
+				continue
+			}
 		case protocol.Trojan:
 			cfg, err := protocol.ParseTrojanUri(uri)
 			if err != nil {

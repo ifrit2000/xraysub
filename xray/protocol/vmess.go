@@ -26,13 +26,7 @@ var vmessUriRe = regexp.MustCompile(`(?m)vmess://(.+)`)
 
 func ParseVmessUri(uri string) (*VmessConfig, error) {
 	sm := vmessUriRe.FindStringSubmatch(uri)
-	smString := sm[1]
-	//base64 后面补0
-	//TODO 有一个这里还是不行
-	for len(smString)%3 != 0 {
-		smString = smString + "="
-	}
-	cfgBytes, err := base64.StdEncoding.DecodeString(smString)
+	cfgBytes, err := base64.RawStdEncoding.DecodeString(sm[1])
 	if err != nil {
 		return nil, err
 	}
