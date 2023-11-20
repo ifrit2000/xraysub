@@ -354,15 +354,16 @@ func parseLinks(uris []string) []*Link {
 		}
 
 		switch p {
-		case protocol.Shadowsocks:
-			cfg, err := protocol.ParseShadowsocksUri(uri)
-			if err != nil {
-				log.Warn("illegal shadowsocks uri schema: " + uri)
-				continue
-			}
-			links = append(links, &Link{
-				SsCfg: cfg,
-			})
+		//不用ss类型的
+		//case protocol.Shadowsocks:
+		//	cfg, err := protocol.ParseShadowsocksUri(uri)
+		//	if err != nil {
+		//		log.Warn("illegal shadowsocks uri schema: " + uri)
+		//		continue
+		//	}
+		//	links = append(links, &Link{
+		//		SsCfg: cfg,
+		//	})
 		case protocol.Vmess:
 			cfg, err := protocol.ParseVmessUri(uri)
 			if err != nil {
